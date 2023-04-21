@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+    <h1> Lista de empleados por departamentos</h1>
+{% endblock title %}
+    
+{% block content %}
+    {% include 'includes/header.html' %}
+    
+    <div class="grid-container">
+        <div class="grid-x">
+            <div class="cell">Empleados por Area</div>
+            <div class="cell">
+                <table>
+                    <thead>
+                        <tr>
+                        <th width="200">id</th>
+                        <th>NOMBRES</th>
+                        <th width="150">APELLIDOS</th>
+                        <th width="150">DEPARTAMENTO</th>
+                        <th width="150">ACCION</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for empleado in empleados %} {% comment %} como esta definico context_object_name podemos utilizar el nombre que se le dio a este objeto y se deja de ser por defecto object_list, es decir, empleados {% endcomment %}
+                            <tr>
+                                <td>{{empleado.id}}</td>
+                                <td>{{empleado.first_name}}</td>
+                                <td>{{empleado.last_name}}</td>
+                                <td>{{empleado.departamento}}</td> 
+                                <td><a class="button warning" href="{% url 'persona_app:empleado_detail' empleado.id %}">Ver</a></td> 
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>                
+            </div>
+        </div>
+    </div>
+    
+
+{% endblock content %}
+    
+
+
+
+<ul>
+    {% for empleado in empleados %}
+        <li>{{ empleado }}</li>
+    {% endfor %}
+</ul>
